@@ -14,23 +14,15 @@ router.post(
           .isEmpty()
           .withMessage("Setting up memberId is not allowed. Please remove this field"),
         check("firstName")
-          .isString()
-          .withMessage("First name must be a string")
           .notEmpty()
           .withMessage("First name cannot be empty"),
         check("lastName")
-          .isString()
-          .withMessage("Last name must be a string")
           .notEmpty()
           .withMessage("Last name cannot be empty"),
         check("phone")
-          .isString()
-          .withMessage("Phone number must be a string")
           .notEmpty()
           .withMessage("Phone number cannot be empty"),
         check("email")
-          .isString()
-          .withMessage("Email must be a string")
           .isEmail()
           .withMessage("Invalid email format")
           .notEmpty()
@@ -56,23 +48,29 @@ router.post(
 router.put('/:id',
     [
       check("firstName")
-      .isString()
-      .withMessage("First name must be a string"),
+      .optional(),
       check("lastName")
-      .isString()
-      .withMessage("Last name must be a string"),
+      .optional(),
       check("phone")
-      .isString()
-      .withMessage("Phone number must be a string"),
+      .optional(),
       check("email")
-      .isString()
-      .withMessage("Email must be a string")
+      .optional()
       .isEmail()
       .withMessage("Invalid email format"),
       check("role")
+      .optional()
       .isIn(["regular", "admin"])
       .withMessage("Role must be either regular or admin")
     ],
+    (req, res, next) => {
+      const error = validationResult(req).formatWith(({ msg }) => msg);
+      const hasError = !error.isEmpty();
+      if (hasError) {
+        res.status(400).json({ error: error.array() });
+      } else {
+        next();
+      }
+    },
     memberController.updateMember);
 
 // delete a member
