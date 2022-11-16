@@ -15,22 +15,13 @@ exports.getMemberList = (req, res) => {
 exports.createNewMember = (req, res) => {
   const memberReqData = new Member(req.body);
   console.log('memberReqData', memberReqData);
-  // check null
-  if (!req.body.firstName || !req.body.lastName || !req.body.phone
-      || !req.body.email || !req.body.role) {
-    res.status(400).json({
-      success: false,
-      "message": "All fields are required"
-    });
-  } else {
-    Member.createMember(memberReqData, (err, member) => {
-      if (err) {
-        res.send(err)
-      } else {
-        res.json({success: true, created: memberReqData})
-      }
-    })
-  }
+  Member.createMember(memberReqData, (err, member) => {
+    if (err) {
+      res.send(err)
+    } else {
+      res.json({success: true, memberCreated: memberReqData})
+    }
+  })
 };
 
 // Update a member
@@ -39,13 +30,14 @@ exports.updateMember = (req, res) => {
   console.log('memberReqData update', memberReqData);
   // check null
   if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
-    res.status(400).send({success: false, message: 'Empty object'});
-  } else {
+    res.status(400).send({success: false, message: 'Empty object. Nothing to update'});
+  }
+  else {
     Member.updateMember(req.params.id, memberReqData, (err, member) => {
       if (err) {
         res.send(err);
       }
-      res.json({success: true, updated: memberReqData})
+      res.json({success: true, memberUpdated: memberReqData})
     })
   }
 }
@@ -55,7 +47,8 @@ exports.deleteMember = (req, res) => {
   Member.deleteMember(req.params.id, (err, member) => {
     if (err) {
       res.send(err);
-    }else{
-    res.json({success: true, message: 'Member deleted successfully'})};
+    } else {
+      res.json({success: true, message: 'Member deleted successfully'})
+    }
   })
 }

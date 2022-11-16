@@ -3,8 +3,8 @@ const mysql = require('mysql');
 // create mysql connection
 const dbConn = mysql.createConnection({
   host: 'localhost',
-  user: 'root',
-  password: 'password', // use your own password here
+  user: 'root',            // use your own username here
+  password: 'password',    // use your own password here
   database: 'TeamMemberManagementApplication'
 });
 

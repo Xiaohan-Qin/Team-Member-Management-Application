@@ -1,5 +1,4 @@
 const express = require("express");
-// const bodyParser = require('body-parser');
 const memberRoutes = require('./app/routes/member.route');
 
 // create express app

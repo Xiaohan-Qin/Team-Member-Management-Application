@@ -2,7 +2,6 @@ const dbConn = require('../../config/db.config');
 
 // constructor
 const Member = function (member) {
-  // this.memberId = member.memberId;
   this.firstName = member.firstName;
   this.lastName = member.lastName;
   this.phone = member.phone;
@@ -10,7 +9,7 @@ const Member = function (member) {
   this.role = member.role;
 };
 
-// get all employees
+// get all team members
 Member.getAllMembers = (result) => {
   dbConn.query('SELECT * FROM TeamMembers;', (err, res) => {
     if (err) {
@@ -23,7 +22,7 @@ Member.getAllMembers = (result) => {
   })
 }
 
-// create new employee
+// create a new team member
 Member.createMember = (memberReqData, result) => {
   dbConn.query('INSERT INTO TeamMembers SET ?;', memberReqData, (err, res) => {
     if (err) {
@@ -36,10 +35,12 @@ Member.createMember = (memberReqData, result) => {
   })
 }
 
-// update employee by id
+// update a team member by memberId
 Member.updateMember = (id, memberReqData, result) => {
-  // filter undefined fields
-  let update = Object.fromEntries(Object.entries(memberReqData).filter(([_, v]) => v != null));
+  // filter out properties that are not given in the request
+  let update = Object.fromEntries(
+      Object.entries(memberReqData).filter(([_, v]) => v != null));
+  // build sql query according to the request
   const query = "Update TeamMembers SET " + Object.keys(update).map(
       key => `${key} = ?`).join(", ") + " WHERE memberId = ?";
   const parameters = [...Object.values(update), id];

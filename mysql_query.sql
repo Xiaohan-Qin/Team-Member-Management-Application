@@ -14,6 +14,7 @@ CREATE TABLE TeamMembers (
 	CONSTRAINT pk_TeamMembers_memberId PRIMARY KEY (MemberId)
 );
 
+-- insert initial data into date base
 INSERT INTO TeamMembers (firstName, lastName, Phone, email, role) 
 VALUES("Peter", "Dong", "206-443-7080", "peterD@gmail.com", "regular");
 
