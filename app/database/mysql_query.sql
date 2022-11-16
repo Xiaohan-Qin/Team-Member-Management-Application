@@ -1,6 +1,5 @@
 CREATE SCHEMA IF NOT EXISTS TeamMemberManagementApplication;
 USE TeamMemberManagementApplication;
-ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
 
 DROP TABLE IF EXISTS TeamMembers;
 
