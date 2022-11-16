@@ -1,6 +1,6 @@
 const dbConn = require('../database/db.connection');
 
-// constructor
+// constructor of team member
 const Member = function (member) {
   this.firstName = member.firstName;
   this.lastName = member.lastName;
@@ -37,10 +37,10 @@ Member.createMember = (memberReqData, result) => {
 
 // update a team member by memberId
 Member.updateMember = (id, memberReqData, result) => {
-  // filter out properties that are not given in the request
+  // filter out properties that are not given in the request body
   let update = Object.fromEntries(
       Object.entries(memberReqData).filter(([_, v]) => v != null));
-  // build sql query according to the request
+  // dynamically build sql query
   const query = "Update TeamMembers SET " + Object.keys(update).map(
       key => `${key} = ?`).join(", ") + " WHERE memberId = ?";
   const parameters = [...Object.values(update), id];
@@ -55,7 +55,7 @@ Member.updateMember = (id, memberReqData, result) => {
   })
 }
 
-// remove a team member
+// remove a team member by memberId
 Member.deleteMember = (id, result) => {
   dbConn.query("DELETE FROM TeamMembers WHERE memberId = ?", id, (err, res) => {
     if (err) {

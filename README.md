@@ -25,7 +25,7 @@ If everything goes well, you should see something like this:<br>
 
 
 ## Testing Endpoints with CURL Commands
-My server is running on port 3000 so my all of my tests would reflect this port number.
+My server is running on port 3000 so all my tests reflects this port number.
 ### GET
 * Get a list of all team members
   ```

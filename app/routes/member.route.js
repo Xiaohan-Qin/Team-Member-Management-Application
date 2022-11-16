@@ -6,7 +6,7 @@ const memberController = require('../controllers/member.controller');
 // get all members
 router.get('/', memberController.getMemberList);
 
-// create a new member
+// validate request body and create a new member
 router.post(
     '/',
     [
@@ -44,7 +44,7 @@ router.post(
     },
     memberController.createNewMember);
 
-// update a member
+// validate request body and update a member
 router.put('/:id',
     [
       check("firstName")
