@@ -13,7 +13,8 @@ listing team members, adding a new team member, editing a team member, and delet
 2. Run ```npm install``` in your console to install all the dependencies needed for this application.
 3. Create your own **.env** file in the root of the project following **.env.example** file as an example. 
 Fill in the following variables: NODE_PORT, DB_HOST, DB_NAME, DB_USER, DB_PASSWORD, DB_PORT for configuration.
-4. Check the app/database/mysql_query.sql file and execute it in your Workbench to initialize the schema and tables.
+4. Check the app/database/mysql_query.sql file. If you're using mysql, uncomment the third line and insert your database password to authenticate future connection. 
+If you're using mysql2, ignore this step. Then execute the queries in your Workbench to initialize schema and tables.
 5. Run ```npm start``` in your console to start the application.
 If everything goes well, you should see something like this:<br>
     ```
