@@ -1,11 +1,13 @@
 const express = require("express");
 const memberRoutes = require('./app/routes/member.route');
+const dotenv = require("dotenv");
 
 // create express app
 const app = express();
+dotenv.config();
 
 // setup server port
-const port = process.env.PORT || 3000;
+const port = process.env.NODE_PORT;
 
 // middlewares
 app.use(express.json());

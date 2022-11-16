@@ -1,4 +1,4 @@
-const dbConn = require('../../config/db.config');
+const dbConn = require('../database/db.connection');
 
 // constructor
 const Member = function (member) {
